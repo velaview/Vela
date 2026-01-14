@@ -20,6 +20,8 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production.vars]
 NODE_VERSION = "20"
+NPM_FLAGS = "--legacy-peer-deps"
 
 [env.preview.vars]
 NODE_VERSION = "20"
+NPM_FLAGS = "--legacy-peer-deps"
