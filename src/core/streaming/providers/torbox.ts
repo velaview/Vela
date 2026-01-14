@@ -150,7 +150,7 @@ class TorBoxClient {
 
                     if (videoFiles.length > 0) {
                         const bestFile = videoFiles[0];
-                        const ext = bestFile.name.split('.').pop()?.toLowerCase();
+                        const ext = bestFile.name.split('.').pop()?.toLowerCase() || '';
                         const isDirectPlay = ['mp4', 'webm'].includes(ext);
 
                         if (isDirectPlay) {

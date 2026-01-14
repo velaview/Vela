@@ -11,18 +11,20 @@ const AUTH_TAG_LENGTH = 128; // bits
 // Helper: Convert between ArrayBuffer and hex strings
 // ─────────────────────────────────────────────────────────────
 
-function bufferToHex(buffer: ArrayBuffer): string {
-    return Array.from(new Uint8Array(buffer))
+function bufferToHex(buffer: ArrayBuffer | Uint8Array): string {
+    const arr = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
+    return Array.from(arr)
         .map(b => b.toString(16).padStart(2, '0'))
         .join('');
 }
 
-function hexToBuffer(hex: string): Uint8Array {
+function hexToBuffer(hex: string): ArrayBuffer {
     const bytes = new Uint8Array(hex.length / 2);
     for (let i = 0; i < hex.length; i += 2) {
         bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16);
     }
-    return bytes;
+    // Return ArrayBuffer to satisfy Web Crypto API types
+    return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
 }
 
 // ─────────────────────────────────────────────────────────────
