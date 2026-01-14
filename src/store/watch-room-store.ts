@@ -23,6 +23,8 @@ export interface RoomInfo {
     season?: number;
     episode?: number;
     status: string;
+    maxMembers?: number;
+    controlMode?: string;
     expiresAt: string;
 }
 
