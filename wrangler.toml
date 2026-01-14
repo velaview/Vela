@@ -3,11 +3,11 @@
 # ═══════════════════════════════════════════════════════════════════════════
 #
 # Deploy: Connect GitHub repo in Cloudflare Dashboard
-# Build command: npx @cloudflare/next-on-pages
+# Build command: npm run pages:build
 # Output directory: .vercel/output/static
 
 name = "vela"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-12-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
@@ -20,8 +20,6 @@ pages_build_output_dir = ".vercel/output/static"
 
 [env.production.vars]
 NODE_VERSION = "20"
-NPM_FLAGS = "--legacy-peer-deps"
 
 [env.preview.vars]
 NODE_VERSION = "20"
-NPM_FLAGS = "--legacy-peer-deps"

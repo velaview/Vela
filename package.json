@@ -15,12 +15,11 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "pages:build": "npx @cloudflare/next-on-pages",
-    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
-    "pages:watch": "npx @cloudflare/next-on-pages --watch"
+    "pages:deploy": "npm run pages:build && npx wrangler pages deploy .vercel/output/static --project-name=vela"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@libsql/client": "^0.15.15",
+    "@libsql/client": "^0.14.0",
     "@radix-ui/react-avatar": "^1.1.11",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
