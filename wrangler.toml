@@ -1,0 +1,78 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# VELA - Cloudflare Pages Configuration
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Deploy with: npm run pages:deploy
+# Preview with: npm run pages:build && npx wrangler pages dev .vercel/output/static
+
+name = "vela"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Environment Variables
+# ─────────────────────────────────────────────────────────────────────────────
+# Note: Sensitive variables (API keys, secrets) should be set via:
+#   - Cloudflare Dashboard > Pages > Settings > Environment Variables
+#   - Or: wrangler pages secret put <NAME>
+
+[vars]
+NODE_VERSION = "20"
+NEXT_VERSION = "16.1.0"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Production Environment
+# ─────────────────────────────────────────────────────────────────────────────
+
+[env.production]
+# Database: Use Turso for production
+# Set via dashboard:
+#   DATABASE_URL = "libsql://your-db.turso.io"
+#   DATABASE_AUTH_TOKEN = "your-token"
+
+# Authentication secrets (REQUIRED - set via dashboard):
+#   JWT_SECRET = "your-32-char-secret"
+#   API_KEY_ENCRYPTION_SECRET = "your-32-char-secret"
+
+# Optional API keys (set via dashboard):
+#   TORBOX_API_KEY = "your-torbox-key"
+#   TMDB_API_KEY = "your-tmdb-key"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Preview Environment
+# ─────────────────────────────────────────────────────────────────────────────
+
+[env.preview]
+# Uses same configuration as production
+# Can override specific values if needed
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Build Configuration
+# ─────────────────────────────────────────────────────────────────────────────
+
+[build]
+command = "npm run pages:build"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Headers & Caching
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Static assets caching
+[[headers]]
+for = "/static/*"
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+# API responses - short cache
+[[headers]]
+for = "/api/*"
+  [headers.values]
+  Cache-Control = "public, max-age=0, must-revalidate"
+
+# HLS streams - no cache (dynamic)
+[[headers]]
+for = "/api/stream/*"
+  [headers.values]
+  Cache-Control = "no-store"
+  Access-Control-Allow-Origin = "*"

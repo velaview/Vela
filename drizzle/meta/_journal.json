@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1766080207209,
+      "tag": "0000_purple_forgotten_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1766087250356,
+      "tag": "0001_chemical_meggan",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1766382659538,
+      "tag": "0002_yellow_madame_masque",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1766392123967,
+      "tag": "0003_kind_human_fly",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1766492850462,
+      "tag": "0004_concerned_callisto",
+      "breakpoints": true
+    }
+  ]
+}

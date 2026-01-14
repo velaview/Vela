@@ -1,0 +1,71 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/data/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+*.log
+
+# temporary files
+*.json.bak
+catalog_data.json
+catalog_response.json
+hanime_manifest.json
+kitsu-catalogs.json
+kitsu-manifest.json
+manifest_response.json
+
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# cloudflare
+.wrangler/
+
+# test/debug output
+test-output.txt
+test-results/
+tsc-errors.txt
+tsc_log.txt
+tsc_output.txt
+compile_errors.txt
+kitsu-test.json
+
+# research/notes (optional - remove if you want to include)
+research/
+Test new stuff/
+
+# agent files
+.agent/

@@ -1,0 +1,3 @@
+scripts/
+remove_console_logs.py
+summarize_lint.py
