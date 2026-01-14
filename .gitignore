@@ -67,5 +67,6 @@ kitsu-test.json
 research/
 Test new stuff/
 
-# agent files
+# agent/claude files
 .agent/
+.claude/
