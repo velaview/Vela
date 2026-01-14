@@ -5,7 +5,12 @@ import { cookies } from 'next/headers';
 // JWT Configuration
 // ─────────────────────────────────────────────────────────────
 
+// Lazy initialization to avoid build-time errors
+let _jwtSecret: Uint8Array | null = null;
+
 function getJwtSecret(): Uint8Array {
+  if (_jwtSecret) return _jwtSecret;
+
   const secret = process.env.JWT_SECRET;
 
   // Fail loudly in production
@@ -14,7 +19,8 @@ function getJwtSecret(): Uint8Array {
       throw new Error('FATAL: JWT_SECRET environment variable is required in production!');
     }
     console.warn('⚠️  [Security] Using dev-only JWT secret. Set JWT_SECRET in production!');
-    return new TextEncoder().encode('dev-only-32-character-secret-key');
+    _jwtSecret = new TextEncoder().encode('dev-only-32-character-secret-key');
+    return _jwtSecret;
   }
 
   // Validate minimum length for security
@@ -22,10 +28,9 @@ function getJwtSecret(): Uint8Array {
     throw new Error('JWT_SECRET must be at least 32 characters for security.');
   }
 
-  return new TextEncoder().encode(secret);
+  _jwtSecret = new TextEncoder().encode(secret);
+  return _jwtSecret;
 }
-
-const JWT_SECRET = getJwtSecret();
 
 const JWT_ISSUER = 'vela';
 const JWT_AUDIENCE = 'vela-users';
@@ -53,7 +58,7 @@ export async function createToken(payload: { userId: string; email: string }): P
     .setIssuer(JWT_ISSUER)
     .setAudience(JWT_AUDIENCE)
     .setExpirationTime(JWT_EXPIRY)
-    .sign(JWT_SECRET);
+    .sign(getJwtSecret());
 
   return token;
 }
@@ -64,7 +69,7 @@ export async function createToken(payload: { userId: string; email: string }): P
 
 export async function verifyToken(token: string): Promise<TokenPayload | null> {
   try {
-    const { payload } = await jwtVerify(token, JWT_SECRET, {
+    const { payload } = await jwtVerify(token, getJwtSecret(), {
       issuer: JWT_ISSUER,
       audience: JWT_AUDIENCE,
     });
