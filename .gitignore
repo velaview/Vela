@@ -70,3 +70,4 @@ Test new stuff/
 # agent/claude files
 .agent/
 .claude/
+package-lock.json
