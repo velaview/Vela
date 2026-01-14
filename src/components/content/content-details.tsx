@@ -251,7 +251,7 @@ export function ContentDetails({ type, id }: ContentDetailsProps) {
   }
 
   const seasons = isSeries && meta.videos
-    ? [...new Set(meta.videos.map((v) => v.season).filter(Boolean))]
+    ? [...new Set(meta.videos.map((v) => v.season).filter((s): s is number => s !== undefined && s !== null))]
     : [];
 
   return (
